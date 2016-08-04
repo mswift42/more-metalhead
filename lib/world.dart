@@ -1,18 +1,73 @@
 // world.dart - class representation of rooms, items and the player.
 
+class Direction {
+  String _direction;
+  Direction(this._direction);
+  String get direction {
+    switch (_direction) {
+      case 'n':
+      case 'north':
+        return 'north';
+        break;
+      case 'w':
+      case 'west':
+        return 'west';
+        break;
+      case 's':
+      case 'south':
+        return 'south';
+        break;
+      case 'e':
+      case 'east':
+        return 'east';
+        break;
+      case 'se':
+      case 'southeast':
+        return 'southeast';
+        break;
+      case 'ne':
+      case 'northeast':
+        return 'northeast';
+        break;
+      case 'sw':
+      case 'southwest':
+        return 'southwest';
+        break;
+      case 'nw':
+      case 'northwest':
+        return 'northwest';
+        break;
+      case 'u':
+      case 'up':
+        return 'up';
+        break;
+      case 'd':
+      case 'down':
+        return 'down';
+        break;
+
+      default:
+        return _direction;
+    }
+  }
+}
+
 class Location {
-  String name;
+  String _name;
   List<String> _shortDescription;
   List<String> _longDescription;
-  List<CondExit> _cexits;
+  Map<Direction, Exit> _exits;
 
-
+  Location(
+      this._name, this._shortDescription, this._longDescription, this._exits);
 }
+
+enum Exit { CondExit, UnCondExit, NoExit }
 
 class CondExit {
   String _direction;
   Location _nextloc;
-  Map<String,bool> _condition;
+  Map<String, bool> _condition;
 
   CondExit(this._direction, this._nextloc, this._condition);
 
@@ -21,8 +76,6 @@ class CondExit {
   Location get nextloc => _nextloc;
 
   String get direction => _direction;
-
-
 }
 
 class UnCondExit {
@@ -34,6 +87,11 @@ class UnCondExit {
   Location get nextloc => _nextloc;
 
   String get direction => _direction;
+}
 
+class NoExit {
+  Direction _direction;
+  List<String> _noexittext;
 
+  NoExit(this._direction, this._noexittext);
 }
