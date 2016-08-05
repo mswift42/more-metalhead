@@ -33,12 +33,22 @@ class Location {
   List<String> _longDescription;
   List<String> _shortDescription;
   Map<Direction, Exit> _exits;
-  Map<String,bool> _flags;
+  Map<String, bool> _flags;
   List<Item> _items;
-
 
   Location(
       this._name, this._shortDescription, this._longDescription, this._exits);
+
+  String get name => _name;
+  List<String> get longDescription => _longDescription;
+
+  List<String> get shortDescription => _shortDescription;
+
+  Map<Direction, Exit> get exits => _exits;
+
+  Map<String, bool> get flags => _flags;
+
+  List<Item> get items => _items;
 }
 
 class Item {
@@ -48,11 +58,18 @@ class Item {
   List<String> _longDescription;
   List<String> _shortDescription;
   Map<InputCmd, ExecCmd> _actions;
-  Map<String,bool> _flags;
+  Map<String, bool> _flags;
 
   String get name => _name;
 
-  Item(this._name, this._synonyms, this._firstDescription, this._longDescription, this._shortDescription, this._actions, this._flags);
+  Item(
+      this._name,
+      this._synonyms,
+      this._firstDescription,
+      this._longDescription,
+      this._shortDescription,
+      this._actions,
+      this._flags);
 
   List<String> get synonyms => _synonyms;
 
@@ -103,8 +120,6 @@ class NoExit {
   List<String> get noexittext => _noexittext;
 
   Direction get direction => _direction;
-
-
 }
 
 class Command {
@@ -113,7 +128,6 @@ class Command {
   Command(this._commandname);
 
   String get commandname => _commandname;
-
 }
 
 class InputCmd extends Command {
