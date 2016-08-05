@@ -117,17 +117,17 @@ class NoExit {
 }
 
 class Command {
-  String _commandname;
+  String _command;
 
-  Command(this._commandname);
+  Command(this._command);
 
-  String get commandname => _commandname;
+  String get commandname => _command;
 }
 
 class InputCmd extends Command {
-  InputCmd(String _commandname) : super(_commandname);
+  InputCmd(String _command) : super(_command);
 }
 
 class ExecCmd extends Command {
-  ExecCmd(String _commandname) : super(_commandname);
+  ExecCmd(String _command) : super(_command);
 }
