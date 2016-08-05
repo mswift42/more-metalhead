@@ -30,12 +30,24 @@ final Map<String, String> _directionMap = {
 
 class Location {
   String _name;
-  List<String> _shortDescription;
   List<String> _longDescription;
+  List<String> _shortDescription;
   Map<Direction, Exit> _exits;
+  Map<String,bool> _flags;
+  List<Item> _items;
+
 
   Location(
       this._name, this._shortDescription, this._longDescription, this._exits);
+}
+
+class Item {
+  String _name;
+  List<String> _synonyms;
+  List<String> _firstDescription;
+  List<String> _longDescription;
+  List<String> _shortDescription;
+  Map<InputCmd, ExecCmd> _actions;
 }
 
 enum Exit { CondExit, UnCondExit, NoExit }
@@ -76,4 +88,21 @@ class NoExit {
   Direction get direction => _direction;
 
 
+}
+
+class Command {
+  String _commandname;
+
+  Command(this._commandname);
+
+  String get commandname => _commandname;
+
+}
+
+class InputCmd extends Command {
+  InputCmd(String _commandname) : super(_commandname);
+}
+
+class ExecCmd extends Command {
+  ExecCmd(String _commandname) : super(_commandname);
 }
