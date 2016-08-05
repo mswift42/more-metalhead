@@ -36,7 +36,7 @@ class Location {
   Map<String, bool> _flags;
   List<Item> _items;
 
-  Location(this._name, this._shortDescription, this._longDescription,
+  Location(this._name,  this._longDescription, this._shortDescription,
       this._exits, this._flags, this._items);
 
   String get name => _name;
