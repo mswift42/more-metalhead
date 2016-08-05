@@ -1,7 +1,6 @@
 import 'package:test/test.dart';
 import 'package:more_metalhead/world.dart';
 
-
 void main() {
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
@@ -26,5 +25,23 @@ void main() {
     expect(d4.direction, "northwest");
     var d5 = new Direction('sE');
     expect(d5.direction, "southeast");
+  });
+  test("the Location class get's initialized correctly", () {
+    var dir1 = new Direction("e");
+    var ne1 = new NoExit(["nothing here"]);
+    var it1 = new Item("soap", ["soap", "washing soap", "soap brick"],
+        ["soap"], ["long soap"], ["short soap"], {}, {});
+    var d1 = new Location("bathroom", [
+      "this is the long bathroom"
+    ], [
+      "this is the short bathroom"
+    ], {
+      dir1: ne1
+    }, {"visited" : false}, [it1]);
+    expect(d1.name, "bathroom");
+    expect(d1.longDescription[0], "this is the long bathroom");
+    expect(d1.shortDescription[0], "this is the short bathroom");
+    expect(d1.exits[dir1].noexittext, ["nothing here"]);
+    expect(d1.items[0].name, "soap");
   });
 }
