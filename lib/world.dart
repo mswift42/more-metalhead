@@ -3,52 +3,9 @@
 class Direction {
   String _direction;
   Direction(this._direction);
-  String get direction {
-    switch (_direction) {
-      case 'n':
-      case 'north':
-        return 'north';
-        break;
-      case 'w':
-      case 'west':
-        return 'west';
-        break;
-      case 's':
-      case 'south':
-        return 'south';
-        break;
-      case 'e':
-      case 'east':
-        return 'east';
-        break;
-      case 'se':
-      case 'southeast':
-        return 'southeast';
-        break;
-      case 'ne':
-      case 'northeast':
-        return 'northeast';
-        break;
-      case 'sw':
-      case 'southwest':
-        return 'southwest';
-        break;
-      case 'nw':
-      case 'northwest':
-        return 'northwest';
-        break;
-      case 'u':
-      case 'up':
-        return 'up';
-        break;
-      case 'd':
-      case 'down':
-        return 'down';
-        break;
 
-      default:
-        return _direction;
-    }
+  String get direction {
+    return _directionMap[_direction.toLowerCase()];
   }
 }
 
