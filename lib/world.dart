@@ -52,6 +52,25 @@ class Direction {
   }
 }
 
+final Map<String,String> _directionMap = {
+  'n' : 'north',
+  'north': 'north',
+  'nw': 'northwest',
+  'northwest': 'northwest',
+  'w' : 'west',
+  'west' : 'west',
+  'sw' : 'southwest',
+  'southwest': 'southwest',
+  's': 'south',
+  'south': 'south',
+  'se': 'southeast',
+  'southeast': 'southeast',
+  'e': 'east',
+  'east' : 'east',
+  'ne': 'northeast',
+  'northeast': 'northeast'
+};
+
 class Location {
   String _name;
   List<String> _shortDescription;
