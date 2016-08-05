@@ -48,6 +48,9 @@ class Item {
   List<String> _longDescription;
   List<String> _shortDescription;
   Map<InputCmd, ExecCmd> _actions;
+  Map<String,bool> _flags;
+
+  Item(this._name, this._synonyms, this._firstDescription, this._longDescription, this._shortDescription, this._actions, this._flags);
 }
 
 enum Exit { CondExit, UnCondExit, NoExit }
