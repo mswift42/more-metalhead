@@ -121,7 +121,7 @@ class Command {
 
   Command(this._command);
 
-  String get commandname => _command;
+  String get command => _command;
 }
 
 class InputCmd extends Command {

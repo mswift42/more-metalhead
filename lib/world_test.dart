@@ -44,4 +44,9 @@ void main() {
     expect(d1.exits[dir1].noexittext, ["nothing here"]);
     expect(d1.items[0].name, "soap");
   });
+  test("the command class getter should return the commandname", () {
+    expect(new Command("press button").command, "press button");
+    expect(new InputCmd("look at button").command, "look at button");
+    expect(new ExecCmd("pressButton").command, "pressButton");
+  });
 }
