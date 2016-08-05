@@ -51,7 +51,7 @@ class CondExit {
 
   Location get nextloc => _nextloc;
 
-  String get direction => _direction;
+  Direction get direction => _direction;
 }
 
 class UnCondExit {
@@ -62,7 +62,7 @@ class UnCondExit {
 
   Location get nextloc => _nextloc;
 
-  String get direction => _direction;
+  Direction get direction => _direction;
 }
 
 class NoExit {
@@ -70,4 +70,10 @@ class NoExit {
   List<String> _noexittext;
 
   NoExit(this._direction, this._noexittext);
+
+  List<String> get noexittext => _noexittext;
+
+  Direction get direction => _direction;
+
+
 }
