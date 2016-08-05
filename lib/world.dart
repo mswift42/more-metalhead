@@ -50,7 +50,21 @@ class Item {
   Map<InputCmd, ExecCmd> _actions;
   Map<String,bool> _flags;
 
+  String get name => _name;
+
   Item(this._name, this._synonyms, this._firstDescription, this._longDescription, this._shortDescription, this._actions, this._flags);
+
+  List<String> get synonyms => _synonyms;
+
+  List<String> get firstDescription => _firstDescription;
+
+  List<String> get longDescription => _longDescription;
+
+  List<String> get shortDescription => _shortDescription;
+
+  Map<InputCmd, ExecCmd> get actions => _actions;
+
+  Map<String, bool> get flags => _flags;
 }
 
 enum Exit { CondExit, UnCondExit, NoExit }
