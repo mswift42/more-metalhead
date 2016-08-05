@@ -9,21 +9,21 @@ class Direction {
   }
 }
 
-final Map<String,String> _directionMap = {
-  'n' : 'north',
+final Map<String, String> _directionMap = {
+  'n': 'north',
   'north': 'north',
   'nw': 'northwest',
   'northwest': 'northwest',
-  'w' : 'west',
-  'west' : 'west',
-  'sw' : 'southwest',
+  'w': 'west',
+  'west': 'west',
+  'sw': 'southwest',
   'southwest': 'southwest',
   's': 'south',
   'south': 'south',
   'se': 'southeast',
   'southeast': 'southeast',
   'e': 'east',
-  'east' : 'east',
+  'east': 'east',
   'ne': 'northeast',
   'northeast': 'northeast'
 };
@@ -41,7 +41,7 @@ class Location {
 enum Exit { CondExit, UnCondExit, NoExit }
 
 class CondExit {
-  String _direction;
+  Direction _direction;
   Location _nextloc;
   Map<String, bool> _condition;
 
@@ -55,7 +55,7 @@ class CondExit {
 }
 
 class UnCondExit {
-  String _direction;
+  Direction _direction;
   Location _nextloc;
 
   UnCondExit(this._direction, this._nextloc);
