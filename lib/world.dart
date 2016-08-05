@@ -101,25 +101,19 @@ class CondExit {
 }
 
 class UnCondExit {
-  Direction _direction;
   Location _nextloc;
 
-  UnCondExit(this._direction, this._nextloc);
+  UnCondExit(this._nextloc);
 
   Location get nextloc => _nextloc;
-
-  Direction get direction => _direction;
 }
 
 class NoExit {
-  Direction _direction;
   List<String> _noexittext;
 
-  NoExit(this._direction, this._noexittext);
+  NoExit(this._noexittext);
 
   List<String> get noexittext => _noexittext;
-
-  Direction get direction => _direction;
 }
 
 class Command {
