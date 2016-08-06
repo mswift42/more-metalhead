@@ -25,7 +25,11 @@ final Map<String, String> _directionMap = {
   'e': 'east',
   'east': 'east',
   'ne': 'northeast',
-  'northeast': 'northeast'
+  'northeast': 'northeast',
+  'u': 'up',
+  'up': 'up',
+  'd': 'down',
+  'down': 'down'
 };
 
 class Location {
