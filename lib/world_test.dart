@@ -13,6 +13,8 @@ void main() {
     expect(d4.direction, "east");
     var d5 = new Direction("southWEST");
     expect(d5.direction, "southwest");
+    var d6 = new Direction("UP");
+    expect(d6.direction, 'up');
   });
   test("The direction getter returns the full name for abbreviated inputs", () {
     var d1 = new Direction('ne');
@@ -25,6 +27,10 @@ void main() {
     expect(d4.direction, "northwest");
     var d5 = new Direction('sE');
     expect(d5.direction, "southeast");
+    var d6 = new Direction('d');
+    expect(d6.direction, 'down');
+    var d7 = new Direction('u');
+    expect(d7.direction, 'up');
   });
   test("the Location class get's initialized correctly", () {
     var dir1 = new Direction("e");
