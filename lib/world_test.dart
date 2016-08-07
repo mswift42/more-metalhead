@@ -2,11 +2,18 @@ import 'package:test/test.dart';
 import 'package:more_metalhead/world.dart';
 
 void main() {
+  var direction1 = new Direction('u');
+  var location1 = new Location("bathroom", ["this is the bathroom"],
+      ["your bathroom"], {direction1: new NoExit(["no exit there"])},{"visited" :false},[]);
+  var condexit1 = new CondExit(location1, {"isOpened": true});
   var incmd1 = new InputCmd("open door");
   var outcmd1 = new ExecCmd("openBathroomDoor");
   var item1 = new Item("laptop", ["laptop", "notebook", "computer"],
       ["this is your laptop"], ["this is your trusted Thinkpad"], ["your laptop"],
-      {incmd1: outcmd1}, {"visited" : false, "poweredOn": false});
+      {incmd1: outcmd1}, {"poweredOn": false});
+  var item2 = new Item("wallet", ["wallet", "purse", "pouch"],
+      ["this is your wallet"], ["your magnificent wallet"], ["your wallet"],
+      {incmd1: outcmd1}, {"empty": true});
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
     expect(d1.direction, "west");
@@ -64,7 +71,7 @@ void main() {
     expect(item1.firstDescription[0], "this is your laptop");
     expect(item1.name, "laptop");
     expect(item1.synonyms.contains("computer"), true);
-    expect(item1.flags["visited"], false);
+    expect(item1.flags["poweredOn"], false);
     expect(item1.actions[incmd1], outcmd1);
     expect(item1.actions.containsKey(incmd1), true);
     expect(item1.actions[incmd1].command, "openBathroomDoor");
@@ -79,5 +86,16 @@ void main() {
   });
   test("the ExecCmd class get's initialized correctly", () {
     expect(outcmd1.command, "openBathroomDoor");
+  });
+  test("The Player class get's initialized correctly", () {
+    var p1 = new Player();
+    p1.location = location1;
+    p1.addItem(item1);
+    p1.addItem(item2);
+    expect(p1.location.name, "bathroom");
+    expect(p1.inventory.length, 2);
+    p1.dropItem(item1);
+    expect(p1.inventory.length, 1);
+    expect(p1.inventory[0].name, "wallet");
   });
 }
