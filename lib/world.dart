@@ -87,7 +87,8 @@ class Item {
 
   Map<String, bool> get flags => _flags;
 }
-
+// The Player class represents the players status in the game. It contains
+// the player's current location and lists all Items in the player's inventory.
 class Player {
   Location _location;
   List<Item> _inventory = [];
@@ -107,17 +108,15 @@ class Player {
 enum Exit { CondExit, UnCondExit, NoExit }
 
 class CondExit {
-  Direction _direction;
   Location _nextloc;
   Map<String, bool> _condition;
 
-  CondExit(this._direction, this._nextloc, this._condition);
+  CondExit(this._nextloc, this._condition);
 
   Map<String, bool> get condition => _condition;
 
   Location get nextloc => _nextloc;
 
-  Direction get direction => _direction;
 }
 
 class UnCondExit {
