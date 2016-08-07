@@ -88,6 +88,22 @@ class Item {
   Map<String, bool> get flags => _flags;
 }
 
+class Player {
+  Location _location;
+  List<Item> _inventory = [];
+
+  Location get location => _location;
+
+  set location(Location value) => _location = value;
+
+  List<Item> get inventory => _inventory;
+
+  addItem(Item item) => _inventory.add(item);
+
+  dropItem(Item item) => _inventory.remove(item);
+
+}
+
 enum Exit { CondExit, UnCondExit, NoExit }
 
 class CondExit {
