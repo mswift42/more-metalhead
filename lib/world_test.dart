@@ -69,4 +69,15 @@ void main() {
     expect(item1.actions.containsKey(incmd1), true);
     expect(item1.actions[incmd1].command, "openBathroomDoor");
   });
+  test("the Command class get's initialized correctly", () {
+    var cm1 = new Command("open door");
+    expect(cm1.command, "open door");
+  });
+  test("the InputCmd class get's initialized correctly", () {
+    var inp1 = new InputCmd("open door");
+    expect(inp1.command, "open door");
+  });
+  test("the ExecCmd class get's initialized correctly", () {
+    expect(outcmd1.command, "openBathroomDoor");
+  });
 }
