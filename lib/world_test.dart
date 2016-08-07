@@ -2,6 +2,11 @@ import 'package:test/test.dart';
 import 'package:more_metalhead/world.dart';
 
 void main() {
+  var incmd1 = new InputCmd("open door");
+  var outcmd1 = new ExecCmd("openBathroomDoor");
+  var item1 = new Item("laptop", ["laptop", "notebook", "computer"],
+      ["this is your laptop"], ["this is your trusted Thinkpad"], ["your laptop"],
+      {incmd1: outcmd1}, {"visited" : false, "poweredOn": false});
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
     expect(d1.direction, "west");
@@ -54,5 +59,14 @@ void main() {
     expect(new Command("press button").command, "press button");
     expect(new InputCmd("look at button").command, "look at button");
     expect(new ExecCmd("pressButton").command, "pressButton");
+  });
+  test ("the Item class get's initialized correctly", () {
+    expect(item1.firstDescription[0], "this is your laptop");
+    expect(item1.name, "laptop");
+    expect(item1.synonyms.contains("computer"), true);
+    expect(item1.flags["visited"], false);
+    expect(item1.actions[incmd1], outcmd1);
+    expect(item1.actions.containsKey(incmd1), true);
+    expect(item1.actions[incmd1].command, "openBathroomDoor");
   });
 }
