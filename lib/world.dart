@@ -100,7 +100,7 @@ class Player {
   Location _location;
   List<Item> _inventory = [];
 
-  toggleVisited() {
+  setVisited() {
     _location.flags["visited"] = true;
   }
 
@@ -111,7 +111,7 @@ class Player {
   List<String> moveInDirection(Direction dir) {
     var nloc = _location.exits[dir];
     if (nloc is UnCondExit) {
-      toggleVisited();
+      setVisited();
       location = nloc.nextloc;
       return location.description;
     }
@@ -121,7 +121,7 @@ class Player {
       if (nloc is CondExit) {
         if (nloc.meetsAllConditions()) {
           location = nloc.nextloc;
-          toggleVisited();
+          setVisited();
           return location.description;
         }
         return nloc.condexittext;
