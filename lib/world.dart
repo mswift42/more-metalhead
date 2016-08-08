@@ -110,23 +110,23 @@ class Player {
 
   List<String> moveInDirection(Direction dir) {
     var nloc = _location.exits[dir];
-    switch (nloc) {
-      case UnCondExit: location = nloc.location;
-      return location.description;
+    if (nloc is UnCondExit) {
       toggleVisited();
-        break;
-      case NoExit:
+      location = nloc.nextloc;
+      return location.description;
+    }
+        if (nloc is NoExit) {
         return nloc.noexittext;
-      break;
-      case CondExit:
+      }
+      if (nloc is CondExit) {
         if (nloc.meetsAllConditions()) {
-          location = nloc.location;
-          return location.description;
+          location = nloc.nextloc;
           toggleVisited();
+          return location.description;
         }
         return nloc.condexittext;
+      }
     }
-  }
 
   List<Item> get inventory => _inventory;
 
@@ -147,7 +147,7 @@ class CondExit {
   Map<String, bool> get condition => _condition;
 
   bool meetsAllConditions() {
-    _condition.keys.every((i) => (_condition[i] == true));
+    return _condition.keys.every((i) => (_condition[i] == true));
   }
 
   Location get nextloc => _nextloc;
