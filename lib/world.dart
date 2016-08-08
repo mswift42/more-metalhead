@@ -100,17 +100,31 @@ class Player {
   Location _location;
   List<Item> _inventory = [];
 
+  toggleVisited() {
+    _location.flags["visited"] = true;
+  }
+
   Location get location => _location;
 
   set location(Location value) => _location = value;
 
-  String moveInDirection(Direction dir) {
+  List<String> moveInDirection(Direction dir) {
     var nloc = _location.exits[dir];
     switch (nloc) {
-      case UnCondExit: location = nloc;
+      case UnCondExit: location = nloc.location;
       return location.description;
+      toggleVisited();
         break;
       case NoExit:
+        return nloc.noexittext;
+      break;
+      case CondExit:
+        if (nloc.meetsAllConditions()) {
+          location = nloc.location;
+          return location.description;
+          toggleVisited();
+        }
+        return nloc.condexittext;
     }
   }
 
@@ -131,6 +145,10 @@ class CondExit {
   CondExit(this._nextloc, this._condition);
 
   Map<String, bool> get condition => _condition;
+
+  bool meetsAllConditions() {
+    _condition.keys.every((i) => (_condition[i] == true));
+  }
 
   Location get nextloc => _nextloc;
 
