@@ -48,6 +48,13 @@ class Location {
 
   List<String> get shortDescription => _shortDescription;
 
+  List<String> get description {
+    if (_flags["visited"]) {
+      return _shortDescription;
+    }
+    return _longDescription;
+  }
+
   Map<Direction, Exit> get exits => _exits;
 
   Map<String, bool> get flags => _flags;
@@ -96,6 +103,16 @@ class Player {
   Location get location => _location;
 
   set location(Location value) => _location = value;
+
+  String moveInDirection(Direction dir) {
+    var nloc = _location.exits[dir];
+    switch (nloc) {
+      case UnCondExit: location = nloc;
+      return location.description;
+        break;
+      case NoExit:
+    }
+  }
 
   List<Item> get inventory => _inventory;
 
