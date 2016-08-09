@@ -36,6 +36,13 @@ void main() {
       {"empty": true});
   var location2 = new Location("hallway", ["this is the hallway"],
       ["your hallway"], {direction2: condexit1}, {"visited": false}, []);
+  var location3 = new Location(
+      "living room",
+      ["this is the living room"],
+      ["the living room"],
+      {direction2: condexit1},
+      {"visited": false},
+      [item1, item2]);
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
     expect(d1.direction, "west");
@@ -123,8 +130,29 @@ void main() {
     var p1 = new Player();
     p1.location = location2;
     expect(p1.location.name, "hallway");
-    p1.moveInDirection(direction2);
+    var exittext = p1.moveInDirection(direction2);
     expect(p1.location.name, "bathroom");
     expect(p1.location.flags["visited"], true);
+    expect(exittext, ["your bathroom"]);
+  });
+  test("player can pick up an item", () {
+    var p1 = new Player();
+    p1.location = location3;
+    expect(p1.inventory.length, 0);
+    expect(p1.location.items.length, 2);
+    p1.addItem(item1);
+    expect(p1.inventory.length, 1);
+    expect(p1.location.items.length, 1);
+  });
+  test("player can drop an item", () {
+    var p1 = new Player();
+    p1.location = location3;
+    expect(p1.inventory.length, 0);
+    p1.addItem(item2);
+    expect(p1.inventory.contains(item2), true);
+    expect(p1.location.items.contains(item2), false);
+    p1.dropItem(item2);
+    expect(p1.inventory.contains(item2), false);
+    expect(p1.location.items.contains(item2), true);
   });
 }
