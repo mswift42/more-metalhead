@@ -40,7 +40,7 @@ class Location {
   Map<String, bool> _flags;
   List<Item> _items;
 
-  Location(this._name,  this._longDescription, this._shortDescription,
+  Location(this._name, this._longDescription, this._shortDescription,
       this._exits, this._flags, this._items);
 
   String get name => _name;
@@ -94,6 +94,7 @@ class Item {
 
   Map<String, bool> get flags => _flags;
 }
+
 // The Player class represents the players status in the game. It contains
 // the player's current location and lists all Items in the player's inventory.
 class Player {
@@ -115,25 +116,30 @@ class Player {
       location = nloc.nextloc;
       return location.description;
     }
-        if (nloc is NoExit) {
-        return nloc.noexittext;
-      }
-      if (nloc is CondExit) {
-        if (nloc.meetsAllConditions()) {
-          location = nloc.nextloc;
-          setVisited();
-          return location.description;
-        }
-        return nloc.condexittext;
-      }
+    if (nloc is NoExit) {
+      return nloc.noexittext;
     }
+    if (nloc is CondExit) {
+      if (nloc.meetsAllConditions()) {
+        location = nloc.nextloc;
+        setVisited();
+        return location.description;
+      }
+      return nloc.condexittext;
+    }
+  }
 
   List<Item> get inventory => _inventory;
 
-  addItem(Item item) => _inventory.add(item);
+  addItem(Item item) {
+    _inventory.add(item);
+    _location.items.remove(item);
+  }
 
-  dropItem(Item item) => _inventory.remove(item);
-
+  dropItem(Item item) {
+    _inventory.remove(item);
+    _location.items.add(item);
+  }
 }
 
 enum Exit { CondExit, UnCondExit, NoExit }
@@ -151,7 +157,6 @@ class CondExit {
   }
 
   Location get nextloc => _nextloc;
-
 }
 
 class UnCondExit {
