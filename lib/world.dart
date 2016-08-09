@@ -55,6 +55,14 @@ class Location {
     return _longDescription;
   }
 
+  addItem(Item item) {
+    _items.add(item);
+  }
+
+  removeItem(Item item) {
+    _items.remove(item);
+  }
+
   Map<Direction, Exit> get exits => _exits;
 
   Map<String, bool> get flags => _flags;
@@ -133,12 +141,12 @@ class Player {
 
   addItem(Item item) {
     _inventory.add(item);
-    _location.items.remove(item);
+    _location.removeItem(item);
   }
 
   dropItem(Item item) {
     _inventory.remove(item);
-    _location.items.add(item);
+    _location.addItem(item);
   }
 }
 
