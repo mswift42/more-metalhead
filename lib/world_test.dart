@@ -3,17 +3,39 @@ import 'package:more_metalhead/world.dart';
 
 void main() {
   var direction1 = new Direction('u');
-  var location1 = new Location("bathroom", ["this is the bathroom"],
-      ["your bathroom"], {direction1: new NoExit(["no exit there"])},{"visited" :false},[]);
+  var direction2 = new Direction('e');
+  var direction3 = new Direction('w');
+  var location1 = new Location("bathroom", [
+    "this is the bathroom"
+  ], [
+    "your bathroom"
+  ], {
+    direction1: new NoExit(["no exit there"])
+  }, {
+    "visited": false
+  }, []);
   var condexit1 = new CondExit(location1, {"isOpened": true});
+  var condexit2 = new CondExit(location1, {"hasKey": false, "isOpened": true});
   var incmd1 = new InputCmd("open door");
   var outcmd1 = new ExecCmd("openBathroomDoor");
-  var item1 = new Item("laptop", ["laptop", "notebook", "computer"],
-      ["this is your laptop"], ["this is your trusted Thinkpad"], ["your laptop"],
-      {incmd1: outcmd1}, {"poweredOn": false});
-  var item2 = new Item("wallet", ["wallet", "purse", "pouch"],
-      ["this is your wallet"], ["your magnificent wallet"], ["your wallet"],
-      {incmd1: outcmd1}, {"empty": true});
+  var item1 = new Item(
+      "laptop",
+      ["laptop", "notebook", "computer"],
+      ["this is your laptop"],
+      ["this is your trusted Thinkpad"],
+      ["your laptop"],
+      {incmd1: outcmd1},
+      {"poweredOn": false});
+  var item2 = new Item(
+      "wallet",
+      ["wallet", "purse", "pouch"],
+      ["this is your wallet"],
+      ["your magnificent wallet"],
+      ["your wallet"],
+      {incmd1: outcmd1},
+      {"empty": true});
+  var location2 = new Location("hallway", ["this is the hallway"],
+      ["your hallway"], {direction2: condexit1}, {"visited": false}, []);
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
     expect(d1.direction, "west");
@@ -47,15 +69,10 @@ void main() {
   test("the Location class get's initialized correctly", () {
     var dir1 = new Direction("e");
     var ne1 = new NoExit(["nothing here"]);
-    var it1 = new Item("soap", ["soap", "washing soap", "soap brick"],
-        ["soap"], ["long soap"], ["short soap"], {}, {});
-    var d1 = new Location("bathroom", [
-      "this is the long bathroom"
-    ], [
-      "this is the short bathroom"
-    ], {
-      dir1: ne1
-    }, {"visited" : false}, [it1]);
+    var it1 = new Item("soap", ["soap", "washing soap", "soap brick"], ["soap"],
+        ["long soap"], ["short soap"], {}, {});
+    var d1 = new Location("bathroom", ["this is the long bathroom"],
+        ["this is the short bathroom"], {dir1: ne1}, {"visited": false}, [it1]);
     expect(d1.name, "bathroom");
     expect(d1.longDescription[0], "this is the long bathroom");
     expect(d1.shortDescription[0], "this is the short bathroom");
@@ -67,7 +84,7 @@ void main() {
     expect(new InputCmd("look at button").command, "look at button");
     expect(new ExecCmd("pressButton").command, "pressButton");
   });
-  test ("the Item class get's initialized correctly", () {
+  test("the Item class get's initialized correctly", () {
     expect(item1.firstDescription[0], "this is your laptop");
     expect(item1.name, "laptop");
     expect(item1.synonyms.contains("computer"), true);
@@ -97,5 +114,17 @@ void main() {
     p1.dropItem(item1);
     expect(p1.inventory.length, 1);
     expect(p1.inventory[0].name, "wallet");
+  });
+  test("conditional Exit return false if single condition is not met.", () {
+    expect(condexit1.meetsAllConditions(), true);
+    expect(condexit2.meetsAllConditions(), false);
+  });
+  test("player can move to a different location", () {
+    var p1 = new Player();
+    p1.location = location2;
+    expect(p1.location.name, "hallway");
+    p1.moveInDirection(direction2);
+    expect(p1.location.name, "bathroom");
+    expect(p1.location.flags["visited"], true);
   });
 }
