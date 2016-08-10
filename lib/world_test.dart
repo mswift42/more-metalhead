@@ -14,8 +14,10 @@ void main() {
   }, {
     "visited": false
   }, []);
-  var condexit1 = new CondExit(location1, {"isOpened": true});
-  var condexit2 = new CondExit(location1, {"hasKey": false, "isOpened": true});
+  var condexit1 = new CondExit(
+      location1, {"isOpened": true}, ["You can't open the door without a key"]);
+  var condexit2 = new CondExit(location1, {"hasKey": false, "isOpened": true},
+      ["you need a key stupid"]);
   var incmd1 = new InputCmd("open door");
   var outcmd1 = new ExecCmd("openBathroomDoor");
   var item1 = new Item(
