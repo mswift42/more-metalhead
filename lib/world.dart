@@ -36,7 +36,7 @@ class Location {
   String _name;
   List<String> _longDescription;
   List<String> _shortDescription;
-  Map<Direction, Exit> _exits;
+  Map<Direction,dynamic> _exits;
   Map<String, bool> _flags;
   List<Item> _items;
 
@@ -63,7 +63,7 @@ class Location {
     _items.remove(item);
   }
 
-  Map<Direction, Exit> get exits => _exits;
+  Map<Direction, dynamic> get exits => _exits;
 
   Map<String, bool> get flags => _flags;
 
@@ -133,7 +133,7 @@ class Player {
         setVisited();
         return location.description;
       }
-      return nloc.condexittext;
+      return nloc.failtext;
     }
   }
 
@@ -150,13 +150,12 @@ class Player {
   }
 }
 
-enum Exit { CondExit, UnCondExit, NoExit }
-
 class CondExit {
   Location _nextloc;
   Map<String, bool> _condition;
+  List<String> _failtext;
 
-  CondExit(this._nextloc, this._condition);
+  CondExit(this._nextloc, this._condition, this._failtext);
 
   Map<String, bool> get condition => _condition;
 
@@ -165,6 +164,8 @@ class CondExit {
   }
 
   Location get nextloc => _nextloc;
+
+  List<String> get failtext => _failtext;
 }
 
 class UnCondExit {
