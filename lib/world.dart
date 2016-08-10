@@ -65,8 +65,6 @@ class Location {
 
   Map<Direction, dynamic> get exits => _exits;
 
-  Map<String, bool> get flags => _flags;
-
   List<Item> get items => _items;
 }
 
@@ -108,11 +106,12 @@ class Item {
 class Player {
   Location _location;
   List<Item> _inventory = [];
-  Map<String, bool> _flags = {};
+  Map<String, bool> flags = new Map<String,bool>();
 
   setVisited() {
-    _flags[visitedFlagName()] = true;
+    flags[visitedFlagName()] = true;
   }
+
 
   Location get location => _location;
 
@@ -151,7 +150,7 @@ class Player {
   }
 
   String visitedFlagName() {
-    var loc = _location.name;
+    var loc = _location.name.replaceAll(" ", "");
     return 'visited${loc[0].toUpperCase()}${loc.substring(1)}';
   }
 }
@@ -160,6 +159,7 @@ class CondExit {
   Location _nextloc;
   Map<String, bool> _condition;
   List<String> _failtext;
+  Map<String, bool> get flags => _flags;
 
   CondExit(this._nextloc, this._condition, this._failtext);
 
