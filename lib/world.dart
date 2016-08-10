@@ -111,9 +111,7 @@ class Player {
   Map<String, bool> _flags = {};
 
   setVisited() {
-    var loc = _location.name;
-    var capitalized = 'hasVisited${loc[0].toUpperCase()}${loc.substring((1))}';
-    _location.flags[capitalized] = true;
+    _flags[visitedFlagName()] = true;
   }
 
   Location get location => _location;
@@ -150,6 +148,11 @@ class Player {
   dropItem(Item item) {
     _inventory.remove(item);
     _location.addItem(item);
+  }
+
+  String visitedFlagName() {
+    var loc = _location.name;
+    return 'visited${loc[0].toUpperCase()}${loc.substring(1)}';
   }
 }
 
