@@ -134,8 +134,8 @@ void main() {
     expect(p1.location.name, "hallway");
     var exittext = p1.moveInDirection(direction2);
     expect(p1.location.name, "bathroom");
-    expect(p1.location.flags["visited"], true);
-    expect(exittext, ["your bathroom"]);
+    expect(p1.flags["visitedBathroom"], true);
+    expect(exittext, ["this is the bathroom"]);
   });
   test("player can pick up an item", () {
     var p1 = new Player();
@@ -156,5 +156,10 @@ void main() {
     p1.dropItem(item2);
     expect(p1.inventory.contains(item2), false);
     expect(p1.location.items.contains(item2), true);
+  });
+  test("visitedFlagName method returns a Camel cased visited + location", () {
+    var p1 = new Player();
+    p1.location = location3;
+    expect(p1.visitedFlagName(), "visitedLivingroom");
   });
 }
