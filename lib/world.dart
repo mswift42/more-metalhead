@@ -36,7 +36,7 @@ class Location {
   String _name;
   List<String> _longDescription;
   List<String> _shortDescription;
-  Map<Direction,dynamic> _exits;
+  Map<Direction, dynamic> _exits;
   Map<String, bool> _flags;
   List<Item> _items;
 
@@ -108,9 +108,12 @@ class Item {
 class Player {
   Location _location;
   List<Item> _inventory = [];
+  Map<String, bool> _flags = {};
 
   setVisited() {
-    _location.flags["visited"] = true;
+    var loc = _location.name;
+    var capitalized = 'hasVisited${loc[0].toUpperCase()}${loc.substring((1))}';
+    _location.flags[capitalized] = true;
   }
 
   Location get location => _location;
