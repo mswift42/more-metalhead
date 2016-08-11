@@ -106,12 +106,11 @@ class Item {
 class Player {
   Location _location;
   List<Item> _inventory = [];
-  Map<String, bool> flags = new Map<String,bool>();
+  Map<String, bool> flags = new Map<String, bool>();
 
   setVisited() {
-    flags[visitedFlagName()] = true;
+    flags[visitedFlagName(_location.name)] = true;
   }
-
 
   Location get location => _location;
 
@@ -149,9 +148,19 @@ class Player {
     _location.addItem(item);
   }
 
-  String visitedFlagName() {
-    var loc = _location.name.replaceAll(" ", "");
-    return 'visited${loc[0].toUpperCase()}${loc.substring(1)}';
+  String visitedFlagName(String locationname) {
+    return "visited" + camelCaseName(locationname);
+  }
+
+  String camelCaseName(String locationname) {
+    var name = locationname[0].toUpperCase();
+    for (var i = 1; i < locationname.length; i++) {
+      if (locationname[i] == " ") {
+        return name += camelCaseName(locationname.substring(i + 1));
+      }
+      name += locationname[i];
+    }
+    return name;
   }
 }
 
@@ -159,7 +168,6 @@ class CondExit {
   Location _nextloc;
   Map<String, bool> _condition;
   List<String> _failtext;
-  Map<String, bool> get flags => _flags;
 
   CondExit(this._nextloc, this._condition, this._failtext);
 
