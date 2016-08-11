@@ -160,6 +160,10 @@ void main() {
   test("visitedFlagName method returns a Camel cased visited + location", () {
     var p1 = new Player();
     p1.location = location3;
-    expect(p1.visitedFlagName(), "visitedLivingroom");
+    expect(p1.visitedFlagName(p1.location.name), "visitedLivingRoom");
+    p1.location = location1;
+    expect(p1.visitedFlagName(p1.location.name), "visitedBathroom");
+    p1.location = location2;
+    expect(p1.visitedFlagName(p1.location.name), "visitedHallway");
   });
 }
