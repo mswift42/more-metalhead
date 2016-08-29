@@ -106,10 +106,10 @@ class Item {
 class Player {
   Location _location;
   List<Item> _inventory = [];
-  Map<String, bool> flags = new Map<String, bool>();
+  Map<String, bool> _flags = {};
 
   setVisited() {
-    flags[visitedFlagName(_location.name)] = true;
+    _flags[visitedFlagName(_location.name)] = true;
   }
 
   Location get location => _location;
@@ -146,6 +146,12 @@ class Player {
   dropItem(Item item) {
     _inventory.remove(item);
     _location.addItem(item);
+  }
+
+  bool flagStatus(String flag) => _flags[flag];
+
+  setFlagStatus(String flag, bool status) {
+    _flags[flag] = status;
   }
 
   String visitedFlagName(String locationname) {
