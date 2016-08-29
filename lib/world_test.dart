@@ -134,7 +134,7 @@ void main() {
     expect(p1.location.name, "hallway");
     var exittext = p1.moveInDirection(direction2);
     expect(p1.location.name, "bathroom");
-    expect(p1.flags["visitedBathroom"], true);
+    expect(p1.flagStatus("visitedBathroom"), true);
     expect(exittext, ["this is the bathroom"]);
   });
   test("player can pick up an item", () {
