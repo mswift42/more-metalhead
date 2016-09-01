@@ -20,22 +20,17 @@ void main() {
       ["you need a key stupid"]);
   var incmd1 = new InputCmd("open door");
   var outcmd1 = new ExecCmd("openBathroomDoor");
-  var item1 = new Item(
-      "laptop",
-      ["laptop", "notebook", "computer"],
-      ["this is your laptop"],
-      ["this is your trusted Thinkpad"],
-      ["your laptop"],
-      {incmd1: outcmd1},
-      {"poweredOn": false});
-  var item2 = new Item(
-      "wallet",
-      ["wallet", "purse", "pouch"],
-      ["this is your wallet"],
-      ["your magnificent wallet"],
-      ["your wallet"],
-      {incmd1: outcmd1},
-      {"empty": true});
+  var item1 = new Item();
+  item1.name = "laptop";
+  item1.synonyms = ["laptop", "computer", "netbook", "PC"];
+  item1.flags = {"poweredOn": false};
+  item1.actions = {incmd1: outcmd1};
+  item1.firstDescription = ["this is your laptop"];
+  var item2 = new Item();
+  item2.name = "wallet";
+  var npc1 = new NPC();
+  npc1.name = "thomas";
+  npc1.firstDescription = ["thomas is sitting on the chair."];
   var location2 = new Location("hallway", ["this is the hallway"],
       ["your hallway"], {direction2: condexit1}, {"visited": false}, []);
   var location3 = new Location(
@@ -78,8 +73,8 @@ void main() {
   test("the Location class get's initialized correctly", () {
     var dir1 = new Direction("e");
     var ne1 = new NoExit(["nothing here"]);
-    var it1 = new Item("soap", ["soap", "washing soap", "soap brick"], ["soap"],
-        ["long soap"], ["short soap"], {}, {});
+    var it1 = new Item();
+    it1.name = "soap";
     var d1 = new Location("bathroom", ["this is the long bathroom"],
         ["this is the short bathroom"], {dir1: ne1}, {"visited": false}, [it1]);
     expect(d1.name, "bathroom");
