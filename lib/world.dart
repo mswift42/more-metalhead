@@ -68,7 +68,7 @@ class Location {
   List<Item> get items => _items;
 }
 
-class Item {
+abstract class WorldObject {
   String _name;
   List<String> _synonyms;
   List<String> _firstDescription;
@@ -79,26 +79,40 @@ class Item {
 
   String get name => _name;
 
-  Item(
-      this._name,
-      this._synonyms,
-      this._firstDescription,
-      this._longDescription,
-      this._shortDescription,
-      this._actions,
-      this._flags);
+  set name(String value) => _name = value;
 
   List<String> get synonyms => _synonyms;
 
+  set synonyms(List<String> value) => _synonyms = value;
+
   List<String> get firstDescription => _firstDescription;
+
+  set firstDescription(List<String> value) => _firstDescription = value;
 
   List<String> get longDescription => _longDescription;
 
+  set longDescription(List<String> value) => _longDescription = value;
+
   List<String> get shortDescription => _shortDescription;
+
+  set shortDescription(List<String> value) => _shortDescription = value;
 
   Map<InputCmd, ExecCmd> get actions => _actions;
 
+  set actions(Map<InputCmd, ExecCmd> value) => _actions = value;
+
   Map<String, bool> get flags => _flags;
+
+  set flags(Map<String, bool> value) => _flags = value;
+
+
+}
+
+class Item extends WorldObject{
+}
+
+class NPC extends WorldObject {
+
 }
 
 // The Player class represents the players status in the game. It contains
