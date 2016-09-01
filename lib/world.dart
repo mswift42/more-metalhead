@@ -39,6 +39,7 @@ class Location {
   Map<Direction, dynamic> _exits;
   Map<String, bool> _flags;
   List<Item> _items;
+  List<NPC> _npcs;
 
   Location(this._name, this._longDescription, this._shortDescription,
       this._exits, this._flags, this._items);
@@ -66,6 +67,8 @@ class Location {
   Map<Direction, dynamic> get exits => _exits;
 
   List<Item> get items => _items;
+
+  List<NPC> get npcs => _npcs;
 }
 
 abstract class WorldObject {
