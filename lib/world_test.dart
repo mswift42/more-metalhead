@@ -161,4 +161,8 @@ void main() {
     p1.location = location2;
     expect(p1.visitedFlagName(p1.location.name), "visitedHallway");
   });
+    test("NPC's get initialized correctly", () {
+	expect(npc1.name, "thomas");
+	expect(npc1.firstDescription, ["thomas is sitting on the chair."]);
+    });
 }
