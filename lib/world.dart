@@ -33,42 +33,28 @@ final Map<String, String> _directionMap = {
 };
 
 class Location {
-  String _name;
-  List<String> _longDescription;
-  List<String> _shortDescription;
-  Map<Direction, dynamic> _exits;
-  Map<String, bool> _flags;
-  List<Item> _items;
-  List<NPC> _npcs;
-
-  Location(this._name, this._longDescription, this._shortDescription,
-      this._exits, this._flags, this._items);
-
-  String get name => _name;
-  List<String> get longDescription => _longDescription;
-
-  List<String> get shortDescription => _shortDescription;
+  String name;
+  List<String> longDescription;
+  List<String> shortDescription;
+  Map<Direction, dynamic> exits;
+  Map<String, bool> flags;
+  List<Item> items;
+  List<NPC> npcs;
 
   List<String> get description {
-    if (_flags["visited"]) {
-      return _shortDescription;
+    if (flags["visited"]) {
+      return shortDescription;
     }
-    return _longDescription;
+    return longDescription;
   }
 
   addItem(Item item) {
-    _items.add(item);
+    items.add(item);
   }
 
   removeItem(Item item) {
-    _items.remove(item);
+    items.remove(item);
   }
-
-  Map<Direction, dynamic> get exits => _exits;
-
-  List<Item> get items => _items;
-
-  List<NPC> get npcs => _npcs;
 }
 
 abstract class WorldObject {
@@ -107,16 +93,11 @@ abstract class WorldObject {
   Map<String, bool> get flags => _flags;
 
   set flags(Map<String, bool> value) => _flags = value;
-
-
 }
 
-class Item extends WorldObject{
-}
+class Item extends WorldObject {}
 
-class NPC extends WorldObject {
-
-}
+class NPC extends WorldObject {}
 
 // The Player class represents the players status in the game. It contains
 // the player's current location and lists all Items in the player's inventory.
