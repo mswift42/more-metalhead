@@ -4,12 +4,13 @@ import 'package:more_metalhead/world.dart';
 void main() {
   var direction1 = new Direction('u');
   var direction2 = new Direction('e');
-  var direction3 = new Direction('w');
   var location1 = new Location();
   location1.name = "bathroom";
   location1.longDescription = ["this is the bathroom"];
   location1.shortDescription = ["your bathroom"];
-  location1.exits = {direction1: new NoExit(["no exit there"])};
+  location1.exits = {
+    direction1: new NoExit(["no exit there"])
+  };
   location1.flags = {"visited": false};
   location1.items = [];
   var condexit1 = new CondExit(
@@ -36,13 +37,6 @@ void main() {
   location2.exits = {direction2: condexit1};
   location2.flags = {"visited": false};
 
-//  var location3 = new Location(
-//      "living room",
-//      ["this is the living room"],
-//      ["the living room"],
-//      {direction2: condexit1},
-//      {"visited": false},
-//      [item1, item2]);
   var location3 = new Location();
   location3.name = "living room";
   location3.longDescription = ["this is the living room"];
@@ -90,7 +84,7 @@ void main() {
     d1.name = "bathroom";
     d1.longDescription = ["this is the long bathroom"];
     d1.shortDescription = ["this is the short bathroom"];
-    d1.exits = {dir1:ne1};
+    d1.exits = {dir1: ne1};
     d1.flags = {"visited": false};
     d1.items = [it1];
     expect(d1.name, "bathroom");
