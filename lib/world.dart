@@ -37,9 +37,9 @@ class Location {
   List<String> longDescription;
   List<String> shortDescription;
   Map<Direction, dynamic> exits;
-  Map<String, bool> flags;
-  List<Item> items;
-  List<NPC> npcs;
+  Map<String, bool> flags = {};
+  List<Item> items = [];
+  List<NPC> npcs = [];
 
   List<String> get description {
     if (flags["visited"]) {

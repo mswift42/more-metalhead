@@ -5,15 +5,13 @@ void main() {
   var direction1 = new Direction('u');
   var direction2 = new Direction('e');
   var direction3 = new Direction('w');
-  var location1 = new Location("bathroom", [
-    "this is the bathroom"
-  ], [
-    "your bathroom"
-  ], {
-    direction1: new NoExit(["no exit there"])
-  }, {
-    "visited": false
-  }, []);
+  var location1 = new Location();
+  location1.name = "bathroom";
+  location1.longDescription = ["this is the bathroom"];
+  location1.shortDescription = ["your bathroom"];
+  location1.exits = {direction1: new NoExit(["no exit there"])};
+  location1.flags = {"visited": false};
+  location1.items = [];
   var condexit1 = new CondExit(
       location1, {"isOpened": true}, ["You can't open the door without a key"]);
   var condexit2 = new CondExit(location1, {"hasKey": false, "isOpened": true},
@@ -31,15 +29,26 @@ void main() {
   var npc1 = new NPC();
   npc1.name = "thomas";
   npc1.firstDescription = ["thomas is sitting on the chair."];
-  var location2 = new Location("hallway", ["this is the hallway"],
-      ["your hallway"], {direction2: condexit1}, {"visited": false}, []);
-  var location3 = new Location(
-      "living room",
-      ["this is the living room"],
-      ["the living room"],
-      {direction2: condexit1},
-      {"visited": false},
-      [item1, item2]);
+  var location2 = new Location();
+  location2.name = "hallway";
+  location2.longDescription = ["this is the hallway"];
+  location2.shortDescription = ["your hallway"];
+  location2.exits = {direction2: condexit1};
+  location2.flags = {"visited": false};
+
+//  var location3 = new Location(
+//      "living room",
+//      ["this is the living room"],
+//      ["the living room"],
+//      {direction2: condexit1},
+//      {"visited": false},
+//      [item1, item2]);
+  var location3 = new Location();
+  location3.name = "living room";
+  location3.longDescription = ["this is the living room"];
+  location3.shortDescription = ["the living room"];
+  location3.exits = {direction2: condexit1};
+  location3.items = [item1, item2];
   test("The class direction getter returns a downcased direction", () {
     var d1 = new Direction('WEST');
     expect(d1.direction, "west");
@@ -75,8 +84,15 @@ void main() {
     var ne1 = new NoExit(["nothing here"]);
     var it1 = new Item();
     it1.name = "soap";
-    var d1 = new Location("bathroom", ["this is the long bathroom"],
-        ["this is the short bathroom"], {dir1: ne1}, {"visited": false}, [it1]);
+//    var d1 = new Location("bathroom", ["this is the long bathroom"],
+//        ["this is the short bathroom"], {dir1: ne1}, {"visited": false}, [it1]);
+    var d1 = new Location();
+    d1.name = "bathroom";
+    d1.longDescription = ["this is the long bathroom"];
+    d1.shortDescription = ["this is the short bathroom"];
+    d1.exits = {dir1:ne1};
+    d1.flags = {"visited": false};
+    d1.items = [it1];
     expect(d1.name, "bathroom");
     expect(d1.longDescription[0], "this is the long bathroom");
     expect(d1.shortDescription[0], "this is the short bathroom");
@@ -161,8 +177,8 @@ void main() {
     p1.location = location2;
     expect(p1.visitedFlagName(p1.location.name), "visitedHallway");
   });
-    test("NPC's get initialized correctly", () {
-	expect(npc1.name, "thomas");
-	expect(npc1.firstDescription, ["thomas is sitting on the chair."]);
-    });
+  test("NPC's get initialized correctly", () {
+    expect(npc1.name, "thomas");
+    expect(npc1.firstDescription, ["thomas is sitting on the chair."]);
+  });
 }
