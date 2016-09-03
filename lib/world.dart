@@ -153,14 +153,14 @@ class Player {
   }
 
   String visitedFlagName(String locationname) {
-    return "visited" + camelCaseName(locationname);
+    return "visited" + _camelCaseName(locationname);
   }
 
-  String camelCaseName(String locationname) {
+  String _camelCaseName(String locationname) {
     var name = locationname[0].toUpperCase();
     for (var i = 1; i < locationname.length; i++) {
       if (locationname[i] == " ") {
-        return name += camelCaseName(locationname.substring(i + 1));
+        return name += _camelCaseName(locationname.substring(i + 1));
       }
       name += locationname[i];
     }
